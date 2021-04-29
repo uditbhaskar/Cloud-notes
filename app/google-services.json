@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "643762129059",
+    "project_id": "cloud-notes-f3235",
+    "storage_bucket": "cloud-notes-f3235.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643762129059:android:062a29fecdc472871a1716",
+        "android_client_info": {
+          "package_name": "com.example.cloudnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643762129059-su1erjo5gqbu4dprhq2jvjvo2f19u31h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5oSK6nYfQT4727V4Rs_N2_n39oyQLg1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643762129059-su1erjo5gqbu4dprhq2jvjvo2f19u31h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,7 @@ class CloudNotes : Application() {
     lateinit var applicationComponent: ApplicationComponent
     override fun onCreate() {
         super.onCreate()
+        injectDependencies()
     }
 
     private fun injectDependencies() {
