@@ -4,10 +4,14 @@ package com.example.cloudnotes.di.module
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cloudnotes.ui.base.BaseActivity
+import com.example.cloudnotes.ui.login.LoginViewModel
 import com.example.cloudnotes.ui.splash.SplashViewModel
 import com.example.cloudnotes.utils.ViewModelProviderFactory
 import com.example.cloudnotes.utils.network.NetworkHelper
 import com.example.cloudnotes.utils.rx.SchedulerProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 import dagger.Module
 import dagger.Provides
@@ -27,6 +31,9 @@ class ActivityModule(private val activity: BaseActivity<*>) {
     fun provideLinearLayoutManager(): LinearLayoutManager = LinearLayoutManager(activity)
 
     @Provides
+    fun providesFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
     fun providesSplashViewModel(
             schedulerProvider: SchedulerProvider,
             compositeDisposable: CompositeDisposable,
@@ -39,5 +46,19 @@ class ActivityModule(private val activity: BaseActivity<*>) {
                 networkHelper
         )
     }).get(SplashViewModel::class.java)
+
+    @Provides
+    fun providesLoginViewModel(
+        schedulerProvider: SchedulerProvider,
+        compositeDisposable: CompositeDisposable,
+        networkHelper: NetworkHelper
+    ): LoginViewModel = ViewModelProviders.of(
+        activity, ViewModelProviderFactory(LoginViewModel::class) {
+            LoginViewModel(
+                schedulerProvider,
+                compositeDisposable,
+                networkHelper
+            )
+        }).get(LoginViewModel::class.java)
 }
 

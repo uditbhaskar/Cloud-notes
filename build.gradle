@@ -76,4 +76,8 @@ ext {
     test_runner_version = '1.1.1'
     test_ext_runner_version = '1.1.0'
     hamcrest_version = '2.1'
+
+    //Button(Sign In)
+    sign_in = '1.1.0'
+
 }

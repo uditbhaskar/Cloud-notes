@@ -1,4 +1,4 @@
-package com.example.sampleapp.data.repository
+package com.example.cloudnotes.data.repository
 
 import com.example.cloudnotes.data.local.DatabaseService
 import com.example.cloudnotes.data.model.Dummy

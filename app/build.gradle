@@ -80,6 +80,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     // Lifecycle Annotations
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
@@ -134,4 +135,8 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Sign In button
+
+    implementation "com.shobhitpuri.custombuttons:google-signin:$sign_in"
 }
