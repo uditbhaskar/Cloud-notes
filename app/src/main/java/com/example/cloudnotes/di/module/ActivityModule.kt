@@ -9,9 +9,12 @@ import com.example.cloudnotes.ui.splash.SplashViewModel
 import com.example.cloudnotes.utils.ViewModelProviderFactory
 import com.example.cloudnotes.utils.network.NetworkHelper
 import com.example.cloudnotes.utils.rx.SchedulerProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.FirebaseDatabase
+
 
 import dagger.Module
 import dagger.Provides
@@ -34,6 +37,15 @@ class ActivityModule(private val activity: BaseActivity<*>) {
     fun providesFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
+    fun providesFirebaseDatabase(): FirebaseDatabase = FirebaseDatabase.getInstance()
+
+    @Provides
+    fun providesGoogleSignInClient(
+            gso: GoogleSignInOptions
+    ): GoogleSignInClient = GoogleSignIn.getClient(activity, gso)
+
+
+    @Provides
     fun providesSplashViewModel(
             schedulerProvider: SchedulerProvider,
             compositeDisposable: CompositeDisposable,
@@ -49,16 +61,16 @@ class ActivityModule(private val activity: BaseActivity<*>) {
 
     @Provides
     fun providesLoginViewModel(
-        schedulerProvider: SchedulerProvider,
-        compositeDisposable: CompositeDisposable,
-        networkHelper: NetworkHelper
+            schedulerProvider: SchedulerProvider,
+            compositeDisposable: CompositeDisposable,
+            networkHelper: NetworkHelper
     ): LoginViewModel = ViewModelProviders.of(
-        activity, ViewModelProviderFactory(LoginViewModel::class) {
-            LoginViewModel(
+            activity, ViewModelProviderFactory(LoginViewModel::class) {
+        LoginViewModel(
                 schedulerProvider,
                 compositeDisposable,
                 networkHelper
-            )
-        }).get(LoginViewModel::class.java)
+        )
+    }).get(LoginViewModel::class.java)
 }
 

@@ -2,7 +2,7 @@ package com.example.cloudnotes.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+
 import android.widget.Toast
 import com.example.cloudnotes.R
 import com.example.cloudnotes.di.component.ActivityComponent
@@ -13,8 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -28,26 +27,17 @@ class LoginActivity: BaseActivity<LoginViewModel>() {
     @Inject
     lateinit var auth: FirebaseAuth
 
-
-    private lateinit var googleSignInClient: GoogleSignInClient
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
 
 
     override fun provideLayoutId(): Int = R.layout.activity_login
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        request()
 
-    }
-
-    private fun request(){
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+    private fun signIn() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
 
@@ -70,6 +60,7 @@ class LoginActivity: BaseActivity<LoginViewModel>() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
+
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -80,13 +71,6 @@ class LoginActivity: BaseActivity<LoginViewModel>() {
                     Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
                 }
             }
-    }
-
-
-
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
 

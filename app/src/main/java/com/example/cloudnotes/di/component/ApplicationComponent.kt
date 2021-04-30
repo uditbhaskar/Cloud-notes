@@ -11,6 +11,7 @@ import com.example.cloudnotes.di.ApplicationContext
 import com.example.cloudnotes.di.module.ApplicationModule
 import com.example.cloudnotes.utils.network.NetworkHelper
 import com.example.cloudnotes.utils.rx.SchedulerProvider
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 import dagger.Component
 import io.reactivex.disposables.CompositeDisposable
@@ -58,6 +59,7 @@ interface ApplicationComponent {
 
     fun getSchedulerProvider(): SchedulerProvider
 
+    fun providesGoogleSignInOptions(): GoogleSignInOptions
 
     fun getCompositeDisposable(): CompositeDisposable
 }
